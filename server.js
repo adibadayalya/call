@@ -10,9 +10,11 @@ const users = {};
 
 const socketToRoom = {};
 
-app.get('/',(req,res)=>{
-    res.send("Server is Running")
-})
+const PORT = process.env.PORT || 3001
+
+//app.get('/',(req,res)=>{
+  //  res.send("Server is Running")
+//})
 
 io.on('connection', socket => {
     socket.on("join room", roomID => {
@@ -51,6 +53,6 @@ io.on('connection', socket => {
 
 });
 
-server.listen(process.env.PORT || 3001, () => console.log('server is running on port 3001'));
+server.listen(PORT, () => console.log('server is running on port 3001'));
 
 
