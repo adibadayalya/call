@@ -39,7 +39,7 @@ export default function CallMenu() {
                         <CreateMeeting />
                         <Form.Control type="text" placeholder="Enter Meeting Code" value = {idToCall} onChange = {(e)=>{setIdToCall(e.target.value)}}/>
                         {/*console.log(idToCall)*/}
-                        <Form.Label className="w-100"><Link to ="/meeting" className = "btn btn-primary w-100 mt-3" onClick ={()=>callUser(idToCall)}>Join Meeting</Link></Form.Label>
+                        <Form.Label className="w-100"><Button className = "btn btn-primary w-100 mt-3" onClick ={()=>callUser(idToCall)}>Join Meeting</Button></Form.Label>
                     </Form.Group>
                 </Form>
                 <Link to ="/" className = "btn btn-primary w-100 mt-3">Back To Dashboard</Link>
