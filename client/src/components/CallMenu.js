@@ -20,7 +20,7 @@ export default function CallMenu() {
     }
     function callUser(){
         console.log(idToCall)
-        //history.push('/meeting')
+        history.push(`/meeting/${idToCall}`)
         //history.push(`/`)
     }
     return (
