@@ -12,9 +12,9 @@ const socketToRoom = {};
 
 const PORT = process.env.PORT || 3001
 
-//app.get('/',(req,res)=>{
-  //  res.send("Server is Running")
-//})
+app.get('/',(req,res)=>{
+    res.send("Server is Running")
+})
 
 io.on('connection', socket => {
     socket.on("join room", roomID => {
