@@ -30,7 +30,7 @@ io.on('connection', socket => {
         socketToRoom[socket.id] = roomID;
         const usersInThisRoom = users[roomID].filter(id => id !== socket.id);
 
-        socket.emit("all users", usersInThisRoom);
+        socket.emit("all users", usersInThisRoom, socket.id);
     });
 
     socket.on("sending signal", payload => {
@@ -44,7 +44,9 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
         const roomID = socketToRoom[socket.id];
         let room = users[roomID];
+        
         if (room) {
+            socket.broadcast.emit('user left', socket.id)
             room = room.filter(id => id !== socket.id);
             users[roomID] = room;
         }

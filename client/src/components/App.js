@@ -8,8 +8,6 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile'
-import CallMenu from './CallMenu';
-import Meeting from './Meeting';
 import RoomContext from '../contexts/RoomContext';
 
 import {BrowserRouter as Router, Switch } from 'react-router-dom' 
@@ -23,7 +21,6 @@ function App() {
                 <Switch>
                   <PrivateRoute exact path ="/" component ={Dashboard} />
                   <PrivateRoute path ="/update-profile" component ={UpdateProfile} />
-                  <PrivateRoute path ="/call-menu" component ={CallMenu} />
                   
                   <PrivateRoute path ="/meeting/:roomID" component ={RoomContext} />
                   <PublicRoute path="/signup" component = {SignUp}/>

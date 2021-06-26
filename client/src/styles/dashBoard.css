@@ -1,0 +1,32 @@
+.menu-pic{
+    padding: 12px;
+    position: absolute;
+    top: 20px;
+    right:60px;
+    font-size: small;
+}
+
+.vl{
+    border-left: 1.8px solid black;
+    height: 40px;
+    padding: 6px;
+    margin-top: 4px;
+}
+
+.call-menu{
+    color: white;
+    border: none;
+    border-width: 0.2px;
+    background-color: rgba(143,144,238,280);
+    width: 400px;
+    padding: 40px;
+    font-weight: 650;
+}
+
+.img-graphic{
+    position: absolute;
+    right:80px;
+    bottom: 40px;
+    mix-blend-mode: multiply;
+    z-index: -1;
+}

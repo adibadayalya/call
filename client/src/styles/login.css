@@ -1,0 +1,35 @@
+body{
+    background-image: linear-gradient(45deg, rgba(181,184,249,255), rgba(190,194,238,255))
+}
+
+
+.login{
+    color: white;
+    border: none;
+    border-width: 0.2px;
+    background-color: rgba(143,144,238,280);
+    width: 500px;
+    padding: 40px;
+    font-weight: 550;
+}
+
+.loginContent{
+    padding: 20px;
+}
+
+.line-text {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	margin: auto;
+}
+.line-text::before,
+.line-text::after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	margin: 0px 8px;
+    padding: 1px;
+    margin-top: 5px;
+}

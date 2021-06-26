@@ -1,0 +1,39 @@
+.my-video{
+    position: absolute;
+    bottom: 85px;
+    right: 20px;
+    z-index: 1;
+    width: 30%;
+    border: 0.1px solid black;
+}
+.caller-video{
+    z-index: 0;
+    height: 75%;
+    position: absolute;
+    top: 10px;
+    border: 0.1px solid red;
+}
+
+.control-panel{
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.share-code-button{
+    border: 0.2px solid purple;
+    margin: auto;
+    background-color: rgba(143,144,238,280);
+    color: white;
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+.share-code-button:hover{
+    background-color: rgba(143,144,220,280);
+}
+.cam-icon{
+    position: absolute;
+    right: 100px;
+}
