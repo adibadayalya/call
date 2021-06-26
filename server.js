@@ -15,6 +15,14 @@ const PORT = process.env.PORT || 3001
 
 app.use(express.static('public'))
 
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, './public/index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+  })
+
 io.on('connection', socket => {
     socket.on("join room", roomID => {
         if (users[roomID]) {
