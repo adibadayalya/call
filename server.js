@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
 
+
 const users = {};
 
 const socketToRoom = {};
@@ -16,11 +17,7 @@ const PORT = process.env.PORT || 3001
 app.use(express.static('public'))
 
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
+    res.sendFile('index.html', {root:'./public'})
   })
 
 io.on('connection', socket => {
