@@ -20,13 +20,16 @@
     background-color: rgba(143,144,238,280);
     width: 400px;
     padding: 40px;
+    height: 300px;
+    margin-top: 25vh;
+    margin-left: 4%;
     font-weight: 650;
 }
 
 .img-graphic{
     position: absolute;
-    right:80px;
-    bottom: 40px;
+    right:2%;
+    bottom: 2%;
     mix-blend-mode: multiply;
-    z-index: -1;
+    min-height: 80%;
 }

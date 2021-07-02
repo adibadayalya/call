@@ -1,18 +1,60 @@
+.outer-box{
+    height: 100vh;
+    width: 100vw;
+}
+.video-container{
+    height: 85vh;
+    width: 95vw;
+    position: relative;
+    margin: auto;
+}
+.my-video-container{
+    position: inherit;
+    left: 75%;
+    top:60%
+}
 .my-video{
-    position: absolute;
-    bottom: 85px;
-    right: 20px;
+    position: relative;
     z-index: 1;
-    width: 30%;
+    width: 25%;
+    height: auto;
     border: 0.1px solid black;
+    transform: rotateY(180deg);
+}
+.my-name {
+    padding: 5px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.partner-video-container{
+    position: inherit;
+    background-color: black;
+    bottom: 28%;
+    min-height: 75vh;
+    max-height: 75vh;
+    max-width: 75vw;
 }
 .caller-video{
-    z-index: 0;
-    height: 75%;
-    position: absolute;
-    top: 10px;
+    display: block;
+    min-height: 75vh;
+    max-height: 75vh;
+    max-width: 75vw;
+    margin: auto;
     border: 0.1px solid red;
+    z-index: 0;
 }
+.video-grid{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    border: 2px solid blue;
+}
+
+
 
 .control-panel{
     width: 100%;
@@ -37,3 +79,43 @@
     position: absolute;
     right: 100px;
 }
+.caller-name{
+    position: absolute;
+    top: 0;
+    left:0;
+    z-index: 1;
+    padding: 20px;
+    background-color: black;
+    color: white;
+}
+.join-alert{
+    background-color: slateblue;
+    padding: 10px;
+}
+
+.alt-image-vid-off{
+    position: absolute;
+    left:0;
+    top: 0.5%;
+    background-color: black;
+    margin: auto;
+    width: 865px;
+    height: 430px;
+    align-items: center;
+    justify-content: center;
+}
+.alt-image-off{
+    position: absolute;
+    left: 47%;
+    top: 35%;
+    border: block 4px white;
+    z-index: 1;
+}
+
+.default-message{
+    position: absolute;
+    left: 35%;
+    top:38%;
+    font-size: 60px;
+}
+

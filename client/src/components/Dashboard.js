@@ -18,6 +18,7 @@ export default function Dashboard() {
             const win = window.open(`/meeting/${idToCall}`,'_blank')
             win.focus()
         } else{
+            //history.push('/')
             setError('Enter room code!')
         }
         //history.push(`/`)
@@ -59,13 +60,13 @@ export default function Dashboard() {
                                     <CreateMeeting />
                                     <span className="line-text mt-4 mb-4">or</span>
                                     <Form.Control className="mt-3" type="text" placeholder="Enter Meeting Code" value = {idToCall} onChange = {(e)=>{setIdToCall(e.target.value)}}/>
-                                    <Form.Label className="w-100"><Button className = "mt-3" onClick ={()=>callUser(idToCall)}><b>Join Room</b></Button></Form.Label>
+                                    <Form.Label className="w-100"><Button type = 'submit' className = "mt-3" onClick ={()=>callUser(idToCall)}><b>Join Room</b></Button></Form.Label>
                                 </Form.Group>
                             </Form>
                             {error && <Alert variant = "danger" >{error}</Alert>}
                         </div>
                         <div className="img-graphic">
-                            <Image src={graphicImage} height="500px"/>
+                            <Image className="actual-image" roundedCircle src={graphicImage} height="500px"/>
                         </div>
                     </div>
             </div>         

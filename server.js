@@ -7,9 +7,6 @@ const socket = require("socket.io");
 const io = socket(server);
 
 
-const users = {};
-
-const socketToRoom = {};
 
 const PORT = process.env.PORT || 3001
 
@@ -20,44 +17,72 @@ app.get('/*', function(req, res) {
     res.sendFile('index.html', {root:'./public'})
   })
 
-io.on('connection', socket => {
-    socket.on("join room", roomID => {
-        if (users[roomID]) {
-            const length = users[roomID].length;
-            if (length === 4) {
-                socket.emit("room full");
-                return;
-            }
-            users[roomID].push(socket.id);
+const rooms = {};
+
+const socketToRoom = {};
+
+const userObjects = [];
+
+io.on("connection", socket => {
+    socket.on("join room", ([roomID, userObject]) => {
+        if (rooms[roomID]) {
+            rooms[roomID].push(socket.id);
+            userObjects[roomID].push({"userID":socket.id,"userInfo": userObject})
         } else {
-            users[roomID] = [socket.id];
+            rooms[roomID] = [socket.id];
+            userObjects[roomID] = [{"userID":socket.id,"userInfo": userObject}] 
         }
-        socketToRoom[socket.id] = roomID;
-        const usersInThisRoom = users[roomID].filter(id => id !== socket.id);
-
-        socket.emit("all users", usersInThisRoom, socket.id);
+        socketToRoom[socket.id] = roomID
+        const otherUser = rooms[roomID].find(id => id !== socket.id);
+        if (otherUser) {
+            var otherObject = userObjects[roomID].find(a => a.userID !== socket.id)
+            //const [otherUse, otherUserObject] = otherObject;
+            //console.log(otherObject)
+            //console.log(userObjects[roomID])
+            socket.emit("other user", ([otherUser, otherObject.userInfo]));
+            socket.to(otherUser).emit("user joined", socket.id);
+            //console.log(userObject.displayName)
+        }
     });
 
-    socket.on("sending signal", payload => {
-        io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
+    socket.on('other-user-video-off', (roomID) => {
+        const otherUser = rooms[roomID].find(id => id !== socket.id);
+        if(otherUser)
+        socket.to(otherUser).emit('video off by other user')
+    })
+
+    socket.on('other-user-video-on', (roomID) => {
+        const otherUser = rooms[roomID].find(id => id !== socket.id);
+        if(otherUser)
+        socket.to(otherUser).emit('video on by other user')
+    })
+
+    socket.on("offer", payload => {
+        io.to(payload.target).emit("offer", payload);
     });
 
-    socket.on("returning signal", payload => {
-        io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
+    socket.on("answer", payload => {
+        io.to(payload.target).emit("answer", payload);
+    });
+
+    socket.on("ice-candidate", incoming => {
+        io.to(incoming.target).emit("ice-candidate", incoming.candidate);
     });
 
     socket.on('disconnect', () => {
         const roomID = socketToRoom[socket.id];
-        let room = users[roomID];
-        
+        let room = rooms[roomID];        
         if (room) {
             socket.broadcast.emit('user left', socket.id)
             room = room.filter(id => id !== socket.id);
-            users[roomID] = room;
+            rooms[roomID] = room
+            let temp =userObjects[roomID]
+            temp = temp.filter(obj => obj.userID !== socket.id)
+            userObjects[roomID] = temp
         }
     });
-
 });
+
 
 server.listen(PORT, () => console.log('server is running on port 3001'));
 

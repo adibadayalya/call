@@ -14,7 +14,7 @@ import {BrowserRouter as Router, Switch } from 'react-router-dom'
 
 function App() {
   return (
-        <Container className = "d-flex align-items-center justify-content-center" style={{minHeight:"100vh"}}>
+        <Container className = "d-flex align-items-center justify-content-center" style={{maxHeight:"100vh", maxWidth:"100vw"}}>
           <div className ="w-100">
             <Router>
               <AuthProvider>

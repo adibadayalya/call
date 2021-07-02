@@ -8,9 +8,13 @@ body{
     border: none;
     border-width: 0.2px;
     background-color: rgba(143,144,238,280);
-    width: 500px;
+    width: 480px;
+    height: 480px;
     padding: 40px;
     font-weight: 550;
+    margin: auto;
+    margin-top: 5%;
+    
 }
 
 .loginContent{

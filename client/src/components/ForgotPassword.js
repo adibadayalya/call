@@ -29,7 +29,7 @@ export default function ForgotPassword() {
     }
     return (
         <div>
-        <div className="form shadow">
+        <div className="form shadow" style={{marginTop:"15vh"}}>
             <div className="form-content">
             <h2 className="text-center mb-4" style={{color:"rgba(13,110,253,255)"}}>Password Reset</h2>
             <hr style={{height:"2.5px"}}/>
