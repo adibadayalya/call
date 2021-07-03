@@ -45,17 +45,23 @@ io.on("connection", socket => {
         }
     });
 
+    socket.on('sending a message',([messageRecieved, senderName, roomID]) => {
+        const otherUser = rooms[roomID].find(id => id !== socket.id);
+        if(otherUser)
+        socket.to(otherUser).emit('recieved a new message', ([messageRecieved, senderName]));
+    });
+
     socket.on('other-user-video-off', (roomID) => {
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         if(otherUser)
         socket.to(otherUser).emit('video off by other user')
-    })
+    });
 
     socket.on('other-user-video-on', (roomID) => {
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         if(otherUser)
         socket.to(otherUser).emit('video on by other user')
-    })
+    });
 
     socket.on("offer", payload => {
         io.to(payload.target).emit("offer", payload);

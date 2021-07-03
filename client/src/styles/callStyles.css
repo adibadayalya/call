@@ -10,8 +10,9 @@
 }
 .my-video-container{
     position: inherit;
-    left: 75%;
-    top:60%
+    left: 74%;
+    top:1%;
+    transition: left 1s;
 }
 .my-video{
     position: relative;
@@ -36,16 +37,15 @@
     bottom: 28%;
     min-height: 75vh;
     max-height: 75vh;
-    max-width: 75vw;
+    max-width: 65vw;
 }
 .caller-video{
     display: block;
-    min-height: 75vh;
-    max-height: 75vh;
-    max-width: 75vw;
+    height: 75vh;
+    max-width: 70vw;
     margin: auto;
-    border: 0.1px solid red;
     z-index: 0;
+    object-fit: cover;
 }
 .video-grid{
     display: grid;
@@ -58,8 +58,31 @@
 
 .control-panel{
     width: 100%;
-    margin-bottom: 10px;
     align-items: center;
+    background-color: slateblue;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    align-items: center;
+}
+
+.message-toggle{
+    width: 60px;
+    background: none;
+    border: none;
+    padding: 10px;
+    color: black;
+}
+
+.mic-icon{
+    color: black;
+}
+
+.cam-icon{
+    color: black;
 }
 
 .share-code-button{
@@ -75,10 +98,7 @@
 .share-code-button:hover{
     background-color: rgba(143,144,220,280);
 }
-.cam-icon{
-    position: absolute;
-    right: 100px;
-}
+
 .caller-name{
     position: absolute;
     top: 0;
@@ -94,22 +114,20 @@
 }
 
 .alt-image-vid-off{
-    position: absolute;
-    left:0;
-    top: 0.5%;
+    z-index: 1;
     background-color: black;
     margin: auto;
-    width: 865px;
-    height: 430px;
+    width: 830px;
+    height: 40px;
     align-items: center;
     justify-content: center;
 }
 .alt-image-off{
     position: absolute;
-    left: 47%;
-    top: 35%;
+    left: 43%;
+    top: 30%;
     border: block 4px white;
-    z-index: 1;
+    z-index: 0;
 }
 
 .default-message{
@@ -119,3 +137,75 @@
     font-size: 60px;
 }
 
+.chat-window{
+    height: 73vh;
+    width: 25vw;
+    background-color: black;
+    position: absolute;
+    right: 0;
+    top: 1%;
+    color: white;
+    font-size: small;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.msg{
+    overflow-wrap:break-word;
+    font-weight: 500;
+}
+
+.msg-box{
+    color: white;
+    position: absolute;
+    top: 73vh;
+    right: 0;
+    width: 25vw;
+}
+
+.msg-container{
+    position: fixed;
+    right: -60vw;
+    top: 1vh;
+    transition: right 1s;
+}
+.messageCard{
+    padding: 8px;
+    font-size: 15px;
+
+}
+.senderDetails{
+    font-weight: 600;
+    line-height: 0.1px;
+}
+
+.senderDetailsSelf{
+    color: aqua;
+}
+
+.senderDetailsOther{
+    color:brown;
+}
+
+.message-send-button{
+    background: white;
+    border: none;
+}
+
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    background: darkgray;
+}
+
+::-webkit-scrollbar-thumb{
+    background: grey;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: whitesmoke;
+}

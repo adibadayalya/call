@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import io from 'socket.io-client'
 import { useAuth } from './AuthContext'
-import {Image} from 'react-bootstrap'
+import {Image, Form, InputGroup} from 'react-bootstrap'
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import hangUp from '../images/hang-up.png'
-import {BsClipboard, BsFillMicMuteFill, BsFillMicFill, BsCameraVideoFill, BsCameraVideo} from 'react-icons/bs'
+import {BsClipboard, BsFillMicMuteFill, BsFillMicFill, BsCameraVideoFill, BsCameraVideo, BsCursorFill, BsChatSquareFill, BsChatSquare, BsChatSquareDotsFill} from 'react-icons/bs'
 //import {Transition, animate} from 'react-spring'
 
 
@@ -16,21 +16,26 @@ const videoConstraints = {
 };
 
 export default function Room(props) {
-
     const [muteState, setMuteState] = useState(false)
     const [blindState, setBlindState] = useState(false)
+    const [visibilityMsg, setVisibilityMsg] = useState(false)
     const userVideo = useRef()
     const partnerVideo = useRef()
     const peerRef = useRef()
+    const userVideoContainer = useRef()
     const [otherUserDeets, setOtherUserDeets] = useState()
     const socketRef = useRef()
     const otherUser = useRef()
     const userStream = useRef()
+    const messageDiv = useRef()
+    const actualMessage = useRef()
+    const messageWindow = useRef()
     const {currentUser} = useAuth()
     const [init, setInint] = useState(true)
     const [partner, setPartner] = useState('')
     const [userJoined, setUserJoined] = useState(false)
     const [userLeft, setUserLeft] = useState(false)
+    const [gotANewMessage, setGotANewMessage] = useState(false)
     const [otherUSerVideoVisible, setOtherUSerVideoVisible] = useState(true)
     const roomID = useRef(props.match.params.roomID)
     const partnerVideoGrid = useRef()
@@ -79,6 +84,13 @@ export default function Room(props) {
                 partnerVideo.current.style.display = "block"
             })
 
+            socketRef.current.on('recieved a new message', ([recievedMessage, senderName]) => {
+                //setPartner(senderName)
+                otherMessage(recievedMessage, senderName)
+                setGotANewMessage(true)
+                scrollToBottom()
+            })
+
             socketRef.current.on('user left', (userID) =>{
                 //const item = peersRef.current.find(p => p.peerID === userID);
                 partnerVideo.current.style.display = "none"
@@ -89,6 +101,7 @@ export default function Room(props) {
                 setUserJoined(false)
                 setUserLeft(true)
                 console.log(userLeft)
+                setOtherUSerVideoVisible(true)
                 //item.peer.destroy()
                 //window.close()                         
             })
@@ -233,11 +246,74 @@ export default function Room(props) {
         window.open('','_self').close()
     }
 
+    function moveIt(){
+        if(visibilityMsg){
+            messageWindow.current.style.right ="-60vw"
+            userVideoContainer.current.style.left ="74%";
+            setVisibilityMsg(false)
+            setGotANewMessage(false)
+        } else {
+            messageWindow.current.style.right="1vw"
+            userVideoContainer.current.style.left ="45%";
+            setVisibilityMsg(true)
+            setGotANewMessage(false)
+            
+        }
+    }
+
+    function scrollToBottom() {
+        messageDiv.current.scrollTop=messageDiv.current.scrollHeight;
+    }
+
+    function otherMessage(messageText, senderName) {
+        var messageDetails = document.createElement('div')
+        messageDetails.classList.add('messageCard')
+        var otherName = document.createElement('p')
+        otherName.innerText = senderName
+        otherName.classList.add('senderDetails')
+        otherName.classList.add('senderDetailsOther')
+        var newMsg = document.createElement('p')
+        newMsg.innerText = messageText
+        newMsg.classList.add('msg')
+        messageDetails.append(otherName)
+        messageDetails.append(newMsg)
+        return (messageDiv.current.append(messageDetails))
+    }
+
+    function selfMessage(messageText) {
+        var messageDetails = document.createElement('div')
+        messageDetails.classList.add('messageCard')
+        var yourName = document.createElement('p')
+        yourName.innerText = 'You'
+        yourName.classList.add('senderDetails')
+        yourName.classList.add('senderDetailsSelf')
+        var newMsg = document.createElement('p')
+        newMsg.innerText = messageText
+        newMsg.classList.add('msg')
+        messageDetails.append(yourName)
+        messageDetails.append(newMsg)
+        return (messageDiv.current.append(messageDetails))
+    }
+
+    function sendMessage(){
+        if(actualMessage.current.value!=="")
+        {
+            selfMessage(actualMessage.current.value);
+            scrollToBottom()
+            socketRef.current.emit('sending a message', ([actualMessage.current.value, currentUser.displayName, props.match.params.roomID]))
+            actualMessage.current.value=""
+        }
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+    }
+
 
     return (
         <div className="outer-box">
-        <div className="video-container">
-        <div className="my-video-container">
+        <div className="video-container" id="photo-capture">
+        <div className="my-video-container" ref={userVideoContainer}>
             <span className="my-name">You</span>    
             <video className="my-video" autoPlay ref = {userVideo} muted />
         </div>
@@ -251,9 +327,8 @@ export default function Room(props) {
             {!otherUSerVideoVisible && partner!=='' && 
             (
                 <div className="alt-image-vid-off">
-                <Image roundedCircle className="alt-image-off img-thumbnail" style ={{height:"100px", width:"100px",padding:"1px"}} src = "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"/>
-
-                </div>
+                <Image roundedCircle className="alt-image-off img-thumbnail" style ={{height:"100px", width:"100px",padding:"1px"}} src = {otherUserDeets.photoURL}/>
+            </div>
             )}  
             {
                 partner!=='' &&(
@@ -265,26 +340,40 @@ export default function Room(props) {
             }
                          
         </div>
+        <div ref = {messageWindow} className="msg-container" >
+        <div ref={messageDiv} className="chat-window">
+        </div>    
+
+        <div className ="msg-box">
+        <Form onSubmit={handleSubmit}>
+            <Form.Group id ="message-input">
+                <InputGroup>
+                    <Form.Control type="text" style={{color:"black"}} ref={actualMessage} />
+                    <InputGroup.Append>
+                        <button style={{padding:"8px"}} onClick = {sendMessage} className="message-send-button" ><BsCursorFill size={20} /></button> 
+                    </InputGroup.Append>
+                </InputGroup>
+            </Form.Group>
+        </Form>
+        </div>  
+        
         </div>
+        </div>
+        
+        
         {//partnerVideo.current && console.log(partnerVideo.current.srcObject)}
         }
-        <div className ="text-centre control-panel d-flex">
-        {
-            //userJoined && (
-              //  <p className="join-alert">{partner} has joined!</p>
-            //)
-        }
-
-
+        <div className ="control-panel">            
             <CopyToClipboard text={roomID}>
                 <button className="shadow share-code-button">Copy Room Code <BsClipboard size={15} /></button>
-            </CopyToClipboard>              
-            <Image roundedCircle onClick={() => leaveCall()} src = {hangUp} height="50px" style = {{backgroundColor:"white", padding:"5px",paddingTop:"8px"}}/>
-            <div style={{margin:"auto"}}>      
-                        
-                {muteState?(<BsFillMicMuteFill  size={40} onClick = {muteUnmute}/>):<BsFillMicFill size ={40} onClick = {muteUnmute}/>}
+            </CopyToClipboard>
+                {visibilityMsg?(<button onClick={moveIt} className="message-toggle"><BsChatSquare size={30} /></button>):
+                ( gotANewMessage?(<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={30} /></button>):
+                (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={30} /></button>) )}                         
+                {muteState?(<BsFillMicMuteFill className="mic-icon"  size={40} onClick = {muteUnmute}/>):<BsFillMicFill className="mic-icon" size ={40} onClick = {muteUnmute}/>}
                 {blindState?(<BsCameraVideo className = "cam-icon"  size={40} onClick = {pauseVideo}/>):<BsCameraVideoFill className = "cam-icon" size ={40} onClick = {pauseVideo}/>}
-            </div>
+            <Image roundedCircle onClick={() => leaveCall()} src = {hangUp} height="50px" style = {{backgroundColor:"white", padding:"5px",paddingTop:"8px"}}/>  
+
         </div>
         </div>
     )
