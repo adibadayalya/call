@@ -58,7 +58,7 @@ export default function Room(props) {
                 setOtherUserName(otherUserObject.displayName)
                 setPartner(otherUserObject.displayName)
                 setUserJoined(true)
-                joinAlert(partner)
+                joinAlert()
                 setUserLeft(false)
                 otherUser.current = userID;
                 socketRef.current.emit('my name', currentUser.displayName)
@@ -104,7 +104,7 @@ export default function Room(props) {
                 setPartner('')
                 setUserJoined(false)
                 setUserLeft(true)
-                joinAlert(partner)
+                joinAlert()
                 console.log(userLeft)
                 setOtherUSerVideoVisible(true)
                 //item.peer.destroy()
@@ -158,7 +158,7 @@ export default function Room(props) {
         peerRef.current = createPeer();
         if(incoming.userObject&&init) {
             setUserJoined(true)
-            joinAlert(partner)
+            joinAlert()
             setUserLeft(false)
             setOtherUserDeets(incoming.userObject)
             setOtherUserName(incoming.userObject.displayName)
@@ -202,7 +202,7 @@ export default function Room(props) {
         const candidate = new RTCIceCandidate(incoming);
         /*if(incoming.userObject&&init){
             setUserJoined(true)
-            joinAlert(partner)
+            joinAlert()
             setUserLeft(false)
             setOtherUserDeets(incoming.userObject)
             setPartner(incoming.userObject.displayName)
@@ -316,7 +316,7 @@ export default function Room(props) {
         e.preventDefault();
     }
 
-    function joinAlert(name) {
+    function joinAlert() {
         //console.log('joined')
         const joinElement = document.getElementsByClassName('join-alert')[0]
         joinElement.style.left = "2vw";
@@ -327,6 +327,12 @@ export default function Room(props) {
             //console.log(otherUserName)
             joinElement.style.backgroundColor = "seagreen"
         }
+    }
+
+    function copyAlert() {
+        const copyAlertElement = document.getElementsByClassName('copy-alert')[0]
+        copyAlertElement.style.left='3vw'
+        setTimeout(()=>{copyAlertElement.style.left="-40vw"}, 3000)
     }
 
 
@@ -394,9 +400,12 @@ export default function Room(props) {
             )}
         </div>
         <div className ="control-panel">            
-            <CopyToClipboard text={roomID}>
-                <button className="shadow share-code-button">Copy Room Code <BsClipboard size={15} /></button>
+            <div className="copy-to-clipboard">
+            <span className="copy-alert shadow">Copied!</span>
+            <CopyToClipboard text={roomID.current}>
+                <button className="shadow share-code-button" onClick={()=> copyAlert()}>Copy Room Code <BsClipboard size={15} /></button>
             </CopyToClipboard>
+            </div>
                 <div className="control-panel-element">
                     {visibilityMsg?
                     (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={30} /><span className="button-details">Chat</span></button>):

@@ -93,6 +93,23 @@
     color: black;
 }
 
+.copy-to-clipboard{
+    display: grid;
+    grid-template-columns: auto auto;
+    text-align: center;
+}
+
+.copy-alert{
+    background-color: plum;
+    color: white;
+    padding: 15px;
+    position: absolute;
+    left:-40vw;
+    bottom: 9vh;
+    font-weight: 500;
+    transition: left 1s;
+}
+
 .share-code-button{
     border: 0.2px solid purple;
     margin: auto;
