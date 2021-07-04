@@ -127,14 +127,8 @@ export default function Room(props) {
                 },
                 {
                     urls: 'turn:numb.viagenie.ca',
-<<<<<<< HEAD
                     credential: 'turnServerPass',
                     username: 'abadayalya@gmail.com'
-                    
-=======
-                    credential: 'turnServerPassword',
-                    username: 'abadayalya@gmail.com'
->>>>>>> b2fa3c2243837bf69a2fa3e17bd8635299042d42
                 },
             ]
         });
