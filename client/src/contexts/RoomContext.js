@@ -127,8 +127,8 @@ export default function Room(props) {
                 },
                 {
                     urls: 'turn:numb.viagenie.ca',
-                    credential: 'muazkh',
-                    username: 'webrtc@live.com'
+                    credential: 'turnServerPassword',
+                    username: 'abadayalya@gmail.com'
                 },
             ]
         });
