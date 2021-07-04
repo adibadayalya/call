@@ -26,6 +26,7 @@ export default function Room(props) {
     const [otherUserDeets, setOtherUserDeets] = useState()
     const socketRef = useRef()
     const otherUser = useRef()
+    const [otherUserName, setOtherUserName] = useState('')
     const userStream = useRef()
     const messageDiv = useRef()
     const actualMessage = useRef()
@@ -39,7 +40,6 @@ export default function Room(props) {
     const [otherUSerVideoVisible, setOtherUSerVideoVisible] = useState(true)
     const roomID = useRef(props.match.params.roomID)
     const partnerVideoGrid = useRef()
-    //const [callerName, setCallerName] = useState('');
 
 
     useEffect(() => {
@@ -55,8 +55,10 @@ export default function Room(props) {
                 callUser(userID);
                 //console.log(otherUserObject.displayName)
                 setOtherUserDeets(otherUserObject)
+                setOtherUserName(otherUserObject.displayName)
                 setPartner(otherUserObject.displayName)
                 setUserJoined(true)
+                joinAlert(partner)
                 setUserLeft(false)
                 otherUser.current = userID;
                 socketRef.current.emit('my name', currentUser.displayName)
@@ -93,13 +95,16 @@ export default function Room(props) {
 
             socketRef.current.on('user left', (userID) =>{
                 //const item = peersRef.current.find(p => p.peerID === userID);
+                if(partnerVideo.current)
                 partnerVideo.current.style.display = "none"
+                if(peerRef.current)
                 peerRef.current.close()
                 console.log('userLeft')
                 console.log(userID)
                 setPartner('')
                 setUserJoined(false)
                 setUserLeft(true)
+                joinAlert(partner)
                 console.log(userLeft)
                 setOtherUSerVideoVisible(true)
                 //item.peer.destroy()
@@ -153,8 +158,10 @@ export default function Room(props) {
         peerRef.current = createPeer();
         if(incoming.userObject&&init) {
             setUserJoined(true)
+            joinAlert(partner)
             setUserLeft(false)
             setOtherUserDeets(incoming.userObject)
+            setOtherUserName(incoming.userObject.displayName)
             setPartner(incoming.userObject.displayName)
         }
         const desc = new RTCSessionDescription(incoming.sdp);
@@ -193,12 +200,13 @@ export default function Room(props) {
 
     function handleNewICECandidateMsg(incoming) {
         const candidate = new RTCIceCandidate(incoming);
-        if(incoming.userObject&&init){
+        /*if(incoming.userObject&&init){
             setUserJoined(true)
+            joinAlert(partner)
             setUserLeft(false)
             setOtherUserDeets(incoming.userObject)
             setPartner(incoming.userObject.displayName)
-        }
+        }*/
 
         peerRef.current.addIceCandidate(candidate)
             .catch(e => console.log(e));
@@ -229,7 +237,6 @@ export default function Room(props) {
 
     function muteUnmute(){
         const enabled = userStream.current.getAudioTracks()[0].enabled;
-        console.log('click')
         if(enabled) {
             userStream.current.getAudioTracks()[0].enabled = false
             setMuteState(true)
@@ -309,6 +316,19 @@ export default function Room(props) {
         e.preventDefault();
     }
 
+    function joinAlert(name) {
+        //console.log('joined')
+        const joinElement = document.getElementsByClassName('join-alert')[0]
+        joinElement.style.left = "2vw";
+        setTimeout(()=>{joinElement.style.left="-50vw"}, 3000)
+        if(joinElement.style.backgroundColor === "seagreen"){
+            joinElement.style.backgroundColor = "red";
+        } else {
+            //console.log(otherUserName)
+            joinElement.style.backgroundColor = "seagreen"
+        }
+    }
+
 
     return (
         <div className="outer-box">
@@ -327,7 +347,7 @@ export default function Room(props) {
             {!otherUSerVideoVisible && partner!=='' && 
             (
                 <div className="alt-image-vid-off">
-                <Image roundedCircle className="alt-image-off img-thumbnail" style ={{height:"100px", width:"100px",padding:"1px"}} src = {otherUserDeets.photoURL}/>
+                <Image roundedCircle className="alt-image-off img-thumbnail" style ={{height:"100px", width:"100px",padding:"1px"}} src = {otherUserDeets.photoURL} />
             </div>
             )}  
             {
@@ -361,18 +381,38 @@ export default function Room(props) {
         </div>
         
         
-        {//partnerVideo.current && console.log(partnerVideo.current.srcObject)}
-        }
+        <div className="join-alert">
+            {userJoined &&partner!=='' &&
+                (<>
+                <Image roundedCircle className="img-thumbnail" style ={{height:"50px", width:"50px",padding:"1px"}} src = {otherUserDeets.photoURL}/>
+                 <span className="join-name">{partner} has joined!</span>
+                 </>         
+                )
+            }
+            {userLeft && (
+                <span className="join-name">{otherUserName} got Sick of you!</span>
+            )}
+        </div>
         <div className ="control-panel">            
             <CopyToClipboard text={roomID}>
                 <button className="shadow share-code-button">Copy Room Code <BsClipboard size={15} /></button>
             </CopyToClipboard>
-                {visibilityMsg?(<button onClick={moveIt} className="message-toggle"><BsChatSquare size={30} /></button>):
-                ( gotANewMessage?(<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={30} /></button>):
-                (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={30} /></button>) )}                         
-                {muteState?(<BsFillMicMuteFill className="mic-icon"  size={40} onClick = {muteUnmute}/>):<BsFillMicFill className="mic-icon" size ={40} onClick = {muteUnmute}/>}
-                {blindState?(<BsCameraVideo className = "cam-icon"  size={40} onClick = {pauseVideo}/>):<BsCameraVideoFill className = "cam-icon" size ={40} onClick = {pauseVideo}/>}
-            <Image roundedCircle onClick={() => leaveCall()} src = {hangUp} height="50px" style = {{backgroundColor:"white", padding:"5px",paddingTop:"8px"}}/>  
+                <div className="control-panel-element">
+                    {visibilityMsg?
+                    (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={30} /><span className="button-details">Chat</span></button>):
+                    ( gotANewMessage?
+                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={30} /><span className="button-details">Chat</span></button>):
+                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={30} /><span className="button-details">Chat</span></button>) 
+                    )}
+                </div>
+            <button className="control-button" onClick={() => leaveCall()}><Image roundedCircle src = {hangUp} height="50px" style = {{backgroundColor:"white", padding:"5px",paddingTop:"8px"}}/><span className="button-details">Leave Call</span></button>  
+                
+                {muteState?(<button className="control-button" onClick={muteUnmute}><BsFillMicMuteFill className="mic-icon" size={40}/><span className="button-details">Mute</span></button>)
+                :(<button className="control-button" onClick={muteUnmute}><BsFillMicFill className="mic-icon" size={40}/><span className="button-details">Unmute</span></button>)}
+                
+                {blindState?(<button className="control-button" onClick = {pauseVideo}><BsCameraVideo className = "cam-icon"  size={40}/><span className="button-details">Video Off</span></button>)
+                :(<button className="control-button" onClick = {pauseVideo}><BsCameraVideoFill className = "cam-icon"  size={40}/><span className="button-details">Video On</span></button>)
+                }
 
         </div>
         </div>

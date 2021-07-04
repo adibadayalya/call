@@ -10,6 +10,7 @@ export default function CreateMeeting(){
     function create() {
         const win = window.open(`/meeting/${id.current}`,'_blank')
         //history.push(`/meeting/${id.current}`)
+        id.current = uuid();
         win.focus()
     }
 

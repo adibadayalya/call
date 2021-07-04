@@ -11,7 +11,7 @@
 .my-video-container{
     position: inherit;
     left: 74%;
-    top:1%;
+    top:7%;
     transition: left 1s;
 }
 .my-video{
@@ -70,11 +70,19 @@
 }
 
 .message-toggle{
-    width: 60px;
+    display: flex;
+    width: 100px;
     background: none;
     border: none;
     padding: 10px;
     color: black;
+}
+
+.control-button{
+    border: none;
+    background: none;
+    display: flex;
+    width: 150px;
 }
 
 .mic-icon{
@@ -109,31 +117,48 @@
     color: white;
 }
 .join-alert{
-    background-color: slateblue;
+    z-index: 5;
     padding: 10px;
+    background-color: seagreen;
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 10vh;
+    left: -50vw;
+    align-items: center;
+    transition: left 1s;
+}
+
+.join-name{
+    padding: 14px;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 10px;
+    overflow-wrap: break-word;
+    color: white;
 }
 
 .alt-image-vid-off{
     z-index: 1;
     background-color: black;
     margin: auto;
-    width: 830px;
+    width: 65vw;
     height: 40px;
     align-items: center;
     justify-content: center;
 }
 .alt-image-off{
     position: absolute;
-    left: 43%;
-    top: 30%;
+    left: 29vw;
+    top: 29vh;
     border: block 4px white;
     z-index: 0;
 }
 
 .default-message{
     position: absolute;
-    left: 35%;
-    top:38%;
+    left: 20vw;
+    top:30vh;
     font-size: 60px;
 }
 
@@ -181,17 +206,27 @@
 }
 
 .senderDetailsSelf{
-    color: aqua;
+    color: rgb(9, 243, 173);
 }
 
 .senderDetailsOther{
-    color:brown;
+    color:rgb(14, 212, 247);
 }
 
 .message-send-button{
     background: white;
     border: none;
 }
+
+
+
+.button-details{
+    font-weight: 600;
+    display: block;
+    margin: auto;
+    color: black;
+}
+
 
 
 ::-webkit-scrollbar{

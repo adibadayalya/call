@@ -32,6 +32,11 @@ export default function Dashboard() {
             setError('Failed to Log Out')
         }
     }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+    }
+
     return (
             <div>
                 <div className="d-flex menu-pic text-center">
@@ -55,7 +60,7 @@ export default function Dashboard() {
                 </div>         
                     <div className="d-flex">
                         <div  className="text-center call-menu shadow">
-                            <Form>
+                            <Form onSubmit = {handleSubmit}>
                                 <Form.Group id="name" className="mt-3 form-men">
                                     <CreateMeeting />
                                     <span className="line-text mt-4 mb-4">or</span>
