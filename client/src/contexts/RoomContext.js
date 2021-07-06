@@ -76,13 +76,13 @@ export default function Room(props) {
 
             socketRef.current.on('video off by other user',() => {
                 setOtherUSerVideoVisible(false)
-                console.log('turned Off')
+                //console.log('turned Off')
                 partnerVideo.current.style.display = "none"
             })
 
             socketRef.current.on('video on by other user',() => {
                 setOtherUSerVideoVisible(true)
-                console.log('turned On')
+                //console.log('turned On')
                 partnerVideo.current.style.display = "block"
             })
 
@@ -240,7 +240,6 @@ export default function Room(props) {
         if(enabled) {
             userStream.current.getAudioTracks()[0].enabled = false
             setMuteState(true)
-
         }
         else {
             userStream.current.getAudioTracks()[0].enabled = true
@@ -408,19 +407,19 @@ export default function Room(props) {
             </div>
                 <div className="control-panel-element">
                     {visibilityMsg?
-                    (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={30} /><span className="button-details">Chat</span></button>):
+                    (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={25} /><span className="button-details">Chat</span></button>):
                     ( gotANewMessage?
-                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={30} /><span className="button-details">Chat</span></button>):
-                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={30} /><span className="button-details">Chat</span></button>) 
+                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={25} color="darkgreen" /><span className="button-details">Chat</span></button>):
+                        (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={25} /><span className="button-details">Chat</span></button>) 
                     )}
                 </div>
             <button className="control-button" onClick={() => leaveCall()}><Image roundedCircle src = {hangUp} height="50px" style = {{backgroundColor:"white", padding:"5px",paddingTop:"8px"}}/><span className="button-details">Leave Call</span></button>  
                 
-                {muteState?(<button className="control-button" onClick={muteUnmute}><BsFillMicMuteFill className="mic-icon" size={40}/><span className="button-details">Mute</span></button>)
-                :(<button className="control-button" onClick={muteUnmute}><BsFillMicFill className="mic-icon" size={40}/><span className="button-details">Unmute</span></button>)}
+                {muteState?(<button className="control-button" onClick={muteUnmute}><BsFillMicMuteFill className="mic-icon" size={30} style={{backgroundColor:"red"}}/><span className="button-details">Mute</span></button>)
+                :(<button className="control-button" onClick={muteUnmute}><BsFillMicFill className="mic-icon" size={30} style={{backgroundColor:"white"}}/><span className="button-details">Unmute</span></button>)}
                 
-                {blindState?(<button className="control-button" onClick = {pauseVideo}><BsCameraVideo className = "cam-icon"  size={40}/><span className="button-details">Video Off</span></button>)
-                :(<button className="control-button" onClick = {pauseVideo}><BsCameraVideoFill className = "cam-icon"  size={40}/><span className="button-details">Video On</span></button>)
+                {blindState?(<button className="control-button" onClick = {pauseVideo}><BsCameraVideo className = "cam-icon"  size={30} style={{backgroundColor:"red"}}/><span className="button-details">Video Off</span></button>)
+                :(<button className="control-button" onClick = {pauseVideo}><BsCameraVideoFill className = "cam-icon"  size={30} style={{backgroundColor:"white"}}/><span className="button-details">Video On</span></button>)
                 }
 
         </div>

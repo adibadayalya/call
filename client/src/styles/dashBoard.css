@@ -32,4 +32,16 @@
     bottom: 5vh;
     mix-blend-mode: multiply;
     min-height: 80%;
+    z-index: -1;
+}
+
+.update-btn{
+    text-decoration: none;
+    padding: 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    margin: auto;
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-right: 10px ;
 }

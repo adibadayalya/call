@@ -60,6 +60,7 @@
     width: 100%;
     align-items: center;
     background-color: slateblue;
+    height: 70px;
     padding: 10px;
     position: absolute;
     bottom: 0;
@@ -87,10 +88,26 @@
 
 .mic-icon{
     color: black;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    transition: all 1s ease-out;
 }
 
 .cam-icon{
     color: black;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.msg-icon{
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    border-radius: 50px;
 }
 
 .copy-to-clipboard{

@@ -1,0 +1,17 @@
+.updateProf{
+    background-color: rgba(143,144,238,280);
+    margin: auto;
+    margin-top: 4vh;
+    width:500px;
+    height: auto;
+    padding: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+
+
+.backToDashBoard{
+    padding: 10px;
+    font-weight: 500;
+}
