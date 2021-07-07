@@ -6,6 +6,16 @@ body{
     width: 100vw;
 }
 
+.out-div{
+    height: auto;
+    width: auto;
+    background-color:white;
+    border-radius:1% 1% 100% 1%;
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
 .signUp, .form{
     color: white;
     border: none;
@@ -20,6 +30,22 @@ body{
     margin-top:2.5%;
     width: 500px;
     height: 530px;
+}
+
+.signup-btn{
+    background-color:rgb(10, 152, 207);
+    border: none;
+    border-radius: 6px;
+    padding :10px;
+    width: auto;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    font-family: 'Arial';
+}
+
+.signup-btn:hover{
+    background-color:rgb(5, 116, 160);
 }
 
 .form{

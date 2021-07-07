@@ -1,7 +1,15 @@
 body{
-    background-image: linear-gradient(45deg, rgba(181,184,249,255), rgba(190,194,238,255))
+    background-image: linear-gradient(45deg, purple, rgba(190,194,238,255))
 }
 
+
+.out-div{
+    height: auto;
+    width: auto;
+    background-color:white;
+    border-radius:1% 1% 100% 1%;
+    align-items: center;
+}
 
 .login{
     color: white;
@@ -19,6 +27,22 @@ body{
 
 .loginContent{
     padding: 20px;
+}
+
+.login-btn{
+    background-color:rgb(10, 152, 207);
+    border: none;
+    border-radius: 6px;
+    padding :10px;
+    width: auto;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    font-family: 'Arial';
+}
+
+.login-btn:hover{
+    background-color:rgb(5, 116, 160);
 }
 
 .line-text {

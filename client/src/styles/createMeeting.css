@@ -1,0 +1,13 @@
+.create-meeting-btn{
+    padding: 12px;
+    font-weight: 500;
+    background-color: transparent;
+    border: solid 1px white;
+    color: white;
+    outline: invert;
+}
+
+.create-meeting-btn:hover{
+    background-color: aliceblue;
+    color: rgba(143,144,238,280);
+}
