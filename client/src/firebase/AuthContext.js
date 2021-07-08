@@ -48,14 +48,7 @@ export function AuthProvider({children}) {
         firebase.auth()
         .signInWithPopup(googleProvider)
         .then((result) => {
-            /** @type {firebase.auth.OAuthCredential} */
-            //var credential = result.credential;
-
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            //var token = credential.accessToken;
-            // The signed-in user info.
-            //var user = result.user;
-                // ...
+            // ...
         }).catch((error) => {
             console.log(error);
             // ...
@@ -65,15 +58,7 @@ export function AuthProvider({children}) {
     function msSignIn(){
         firebase.auth().signInWithPopup(msProvider)
             .then((result) => {
-                // IdP data available in result.additionalUserInfo.profile.
                 // ...
-
-                /** @type {firebase.auth.OAuthCredential} */
-                //var credential = result.credential;
-
-                // OAuth access and id tokens can also be retrieved:
-                //var accessToken = credential.accessToken;
-                //var idToken = credential.idToken;
             })
             .catch((error) => {
                 // Handle error.
