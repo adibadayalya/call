@@ -14,6 +14,7 @@
 - [X] In-Call Chat 
 - [X] Ability to have a one on one Video conversation
 - [X] Freedom to control your Video and Audio stream transmission 
+- [X] Screen Share
 
 ## Technologies used:
 * React-JS

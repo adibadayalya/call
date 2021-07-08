@@ -34,15 +34,14 @@
 .partner-video-container{
     position: inherit;
     background-color: black;
-    bottom: 28%;
-    min-height: 75vh;
-    max-height: 75vh;
+    bottom: 25%;
+    height: 75vh;
     max-width: 65vw;
 }
 .caller-video{
     display: block;
     height: 75vh;
-    max-width: 70vw;
+    max-width: 65vw;
     margin: auto;
     z-index: 0;
     object-fit: cover;
@@ -57,21 +56,36 @@
 
 
 .control-panel{
-    width: 100%;
+    width: 350px;
     align-items: center;
     height: 70px;
     padding: 10px;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 35%;
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto;
+    column-gap: 15px;
     align-items: center;
+}
+
+.screen-share{
+    border: 1px solid white;
+    background: transparent;
+    color:white;
+    padding: 10px;
+    font-size: 15px;
+    width: 130px;
+}
+
+.screen-share:hover{
+    background-color: white;
+    color: purple;
 }
 
 .message-toggle{
     display: flex;
-    width: 100px;
+    width: auto;
     background: none;
     border: none;
     padding: 10px;
@@ -87,9 +101,19 @@
     border: none;
     background: none;
     display: flex;
-    width: 150px;
+    width: 50px;
+    margin: auto;
     outline: none;
 
+}
+
+.hang-up-btn{
+    width: 50px;
+    height: 50px;
+    outline: none;
+    background-color: red;
+    border-radius: 50% 50% 0 0;
+    cursor: pointer;
 }
 
 .mic-icon{
@@ -97,8 +121,9 @@
     padding: 10px;
     height: 40px;
     width: 40px;
-    border-radius: 50%;
     transition: all 1s ease-out;
+    border-radius: 50% 50% 0% 50%;
+    margin: auto;
 }
 
 .cam-icon{
@@ -106,7 +131,9 @@
     padding: 10px;
     height: 40px;
     width: 40px;
-    border-radius: 50%;
+    border-radius: 50% 50% 50% 0%;
+    margin: auto;
+
 }
 
 .msg-icon{
@@ -120,6 +147,7 @@
     display: grid;
     grid-template-columns: auto auto;
     text-align: center;
+    padding: 10px;
 }
 
 .copy-alert{
@@ -127,7 +155,7 @@
     color: white;
     padding: 15px;
     position: absolute;
-    left:-40vw;
+    left:-90vw;
     bottom: 9vh;
     font-weight: 500;
     transition: left 1s;
@@ -135,17 +163,16 @@
 }
 
 .share-code-button{
-    border: 0.2px solid purple;
+    border:none;
     margin: auto;
-    background-color: rgba(143,144,238,280);
-    color: white;
-    padding: 10px;
-    width: 200px;
+    background-color: transparent;
+    height: auto;
+    width: 50px;
+    padding: 2px;
     border-radius: 5px;
-    font-weight: 600;
 }
 .share-code-button:hover{
-    background-color: rgba(143,144,220,280);
+    background-color: purple;
 }
 
 .caller-name{

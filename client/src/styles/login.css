@@ -9,6 +9,7 @@ body{
     background-color:white;
     border-radius:1% 1% 100% 1%;
     align-items: center;
+    box-shadow: 0px 15px grey;
 }
 
 .login{
@@ -22,7 +23,6 @@ body{
     font-weight: 550;
     margin: auto;
     margin-top: 5%;
-    
 }
 
 .loginContent{

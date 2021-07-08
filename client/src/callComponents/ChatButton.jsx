@@ -29,10 +29,10 @@ export default function ChatButton({visibilityMsg, gotANewMessage, messageWindow
         <>
             {document.addEventListener('keydown', handleEsc)}
             {visibilityMsg?
-            (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={25} /><span className="button-details">Chat</span></button>):
+            (<button onClick={moveIt} className="message-toggle"><BsChatSquare size={25} /></button>):
             ( gotANewMessage?
-                (<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={25} color="darkgreen" /><span className="button-details">Chat</span></button>):
-                (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={25} color="white" /><span className="button-details">Chat</span></button>) 
+                (<button onClick={moveIt} className="message-toggle"><BsChatSquareDotsFill size={25} color="darkgreen" /></button>):
+                (<button onClick={moveIt} className="message-toggle"><BsChatSquareFill size={25} color="white" /></button>) 
             )}
         </>
     )

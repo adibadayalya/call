@@ -28,6 +28,7 @@ export default function Room(props) {
     const messageDiv = useRef()
     const actualMessage = useRef()
     const messageWindow = useRef()
+    const senders = useRef([])
     const [init, setInint] = useState(true)
     const [otherUSerVideoVisible, setOtherUSerVideoVisible] = useState(true)
     const [visibilityMsg, setVisibilityMsg] = useState(false)
@@ -100,7 +101,7 @@ export default function Room(props) {
 
     function callUser(userID) {
         peerRef.current = createPeer(userID);
-        userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+        userStream.current.getTracks().forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
     }
 
     function createPeer(userID) {
@@ -150,7 +151,7 @@ export default function Room(props) {
         }
         const desc = new RTCSessionDescription(incoming.sdp);
         peerRef.current.setRemoteDescription(desc).then(() => {
-            userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+            userStream.current.getTracks().forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
         }).then(() => {
             return peerRef.current.createAnswer();
         }).then(answer => {
@@ -232,11 +233,12 @@ export default function Room(props) {
                 partner={partner} userJoined={userJoined} 
                 userLeft={userLeft} 
                 />
+            
 
             <ControlPanel roomID={roomID} visibilityMsg={visibilityMsg} gotANewMessage={gotANewMessage}
                 messageWindow={messageWindow} userVideoContainer={userVideoContainer} 
                 setVisibilityMsg={setVisibilityMsg} setGotANewMessage={setGotANewMessage} 
-                userStream={userStream} socketRef={socketRef}
+                userStream={userStream} socketRef={socketRef} senders={senders}
                 />
         </div>
     )

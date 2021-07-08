@@ -20,8 +20,8 @@ export default function MicButton({userStream}) {
     return (
         <>
             {muteState?
-            (<button className="control-button" onClick={muteUnmute}><BsFillMicMuteFill className="mic-icon" size={30} style={{backgroundColor:"red"}}/><span className="button-details">Mute</span></button>)
-            :(<button className="control-button" onClick={muteUnmute}><BsFillMicFill className="mic-icon" size={30} style={{backgroundColor:"white"}}/><span className="button-details">Unmute</span></button>)}
+            (<button className="control-button" onClick={muteUnmute}><BsFillMicMuteFill className="mic-icon" size={30} style={{backgroundColor:"red"}}/></button>)
+            :(<button className="control-button" onClick={muteUnmute}><BsFillMicFill className="mic-icon" size={30} style={{backgroundColor:"white"}}/></button>)}
 
         </>
     )

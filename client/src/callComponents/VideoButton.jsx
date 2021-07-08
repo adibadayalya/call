@@ -21,8 +21,8 @@ export default function VideoButton({userStream, roomID, socketRef}) {
 
     return (
         <>
-            {blindState?(<button className="control-button" onClick = {pauseVideo}><BsCameraVideo className = "cam-icon"  size={30} style={{backgroundColor:"red"}}/><span className="button-details">Video Off</span></button>)
-            :(<button className="control-button" onClick = {pauseVideo}><BsCameraVideoFill className = "cam-icon"  size={30} style={{backgroundColor:"white"}}/><span className="button-details">Video On</span></button>)
+            {blindState?(<button className="control-button" onClick = {pauseVideo}><BsCameraVideo className = "cam-icon"  size={30} style={{backgroundColor:"red"}}/></button>)
+            :(<button className="control-button" onClick = {pauseVideo}><BsCameraVideoFill className = "cam-icon"  size={30} style={{backgroundColor:"white"}}/></button>)
             }
         </>
     )
