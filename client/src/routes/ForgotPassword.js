@@ -3,8 +3,12 @@ import {Form, Alert,Button} from 'react-bootstrap'
 import { useAuth } from '../firebase/AuthContext'
 import { Link } from 'react-router-dom'
 import Email from '../formComponents/Email'
-
 import '../styles/signUp.css' 
+
+/**
+ * 
+ * #returns The Forgot Password Page
+ */
 
 export default function ForgotPassword() {
     const emailRef = useRef()
