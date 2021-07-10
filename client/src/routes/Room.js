@@ -126,14 +126,40 @@ export default function Room(props) {
         //creating a peer
         const peer = new RTCPeerConnection({
             iceServers: [
+                {url:'stun:stun01.sipphone.com'},
+                {url:'stun:stun.ekiga.net'},
+                {url:'stun:stun.fwdnet.net'},
+                {url:'stun:stun.ideasip.com'},
+                {url:'stun:stun.iptel.org'},
+                {url:'stun:stun.rixtelecom.se'},
+                {url:'stun:stun.schlund.de'},
+                {url:'stun:stun.l.google.com:19302'},
+                {url:'stun:stun1.l.google.com:19302'},
+                {url:'stun:stun2.l.google.com:19302'},
+                {url:'stun:stun3.l.google.com:19302'},
+                {url:'stun:stun4.l.google.com:19302'},
+                {url:'stun:stunserver.org'},
+                {url:'stun:stun.softjoys.com'},
+                {url:'stun:stun.voiparound.com'},
+                {url:'stun:stun.voipbuster.com'},
+                {url:'stun:stun.voipstunt.com'},
+                {url:'stun:stun.voxgratia.org'},
+                {url:'stun:stun.xten.com'},
                 {
-                    urls: "stun:stun.stunprotocol.org"
+                url: 'turn:numb.viagenie.ca',
+                credential: 'muazkh',
+                username: 'webrtc@live.com'
                 },
                 {
-                    urls: 'turn:numb.viagenie.ca',
-                    credential: 'muazkh',
-                    username: 'webrtc@live.com'
+                url: 'turn:192.158.29.39:3478?transport=udp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
                 },
+                {
+                url: 'turn:192.158.29.39:3478?transport=tcp',
+                credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
+                username: '28224511:1379330808'
+                }
             ]
         });
         peer.onicecandidate = handleICECandidateEvent;
@@ -162,6 +188,9 @@ export default function Room(props) {
     function handleRecieveCall(incoming) {
         //handeling the recieved call and providing with appropriate data in return to the user
         peerRef.current = createPeer();
+        //other user offer details
+        const desc = new RTCSessionDescription(incoming.sdp);
+
         if(incoming.userObject&&init) {
             setUserJoined(true)
             joinAlert()
@@ -170,8 +199,6 @@ export default function Room(props) {
             setOtherUserName(incoming.userObject.displayName)
             setPartner(incoming.userObject.displayName)
         }
-        const desc = new RTCSessionDescription(incoming.sdp);
-        //other user offer details
         peerRef.current.setRemoteDescription(desc).then(() => {
             userStream.current.getTracks().forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
         }).then(() => {
