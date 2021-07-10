@@ -5,8 +5,6 @@
 
 >Deployed on Heroku at [link](https://clone-ms-eng-adi.herokuapp.com/)  
 
-## Demo
-> Video Demo will be added here?
 
 ## Features:
 - [X] Free
