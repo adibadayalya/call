@@ -27,7 +27,7 @@ export default function PartnerVideoContainer({partnerVideoGrid, partner,otherUS
             {
                 partner!=='' &&(
                     <>
-                    <video controls className="caller-video" autoPlay ref = {partnerVideo} />
+                    <video className="caller-video" autoPlay ref = {partnerVideo} />
                     <span className="caller-name">{partner}</span>
                     </>
                 )
