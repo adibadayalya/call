@@ -131,7 +131,9 @@ export default function Room(props) {
                 { urls: 'stun:stun2.l.google.com:19302' },
                 { urls: 'stun:stun3.l.google.com:19302' },
                 { urls: 'stun:stun4.l.google.com:19302' },
-                
+                {
+                    urls: "stun:stun.stunprotocol.org"
+                },
                 {
                     url: 'turn:numb.viagenie.ca',
                     credential: 'muazkh',
