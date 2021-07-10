@@ -118,7 +118,7 @@ export default function Room(props) {
         //sendding an offer request 
         peerRef.current = createPeer(userID);
         //adding the stram information to the peerObject
-        userStream.current.getTracks().forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
+        userStream.current.getTracks().forEach(track => (peerRef.current.addTrack(track, userStream.current)));
     }
 
     function createPeer(userID) {
@@ -131,11 +131,11 @@ export default function Room(props) {
                 { urls: 'stun:stun2.l.google.com:19302' },
                 { urls: 'stun:stun3.l.google.com:19302' },
                 { urls: 'stun:stun4.l.google.com:19302' },
-                /* {
+                {
                     url: 'turn:numb.viagenie.ca',
                     credential: 'muazkh',
                     username: 'webrtc@live.com'
-                }, */
+                }, 
             ]
         });
         peer.onicecandidate = handleICECandidateEvent;
@@ -176,7 +176,7 @@ export default function Room(props) {
             setPartner(incoming.userObject.displayName)
         }
         peerRef.current.setRemoteDescription(desc).then(() => {
-            userStream.current.getTracks().forEach(track => senders.current.push(peerRef.current.addTrack(track, userStream.current)));
+            userStream.current.getTracks().forEach(track => (peerRef.current.addTrack(track, userStream.current)));
         }).then(() => {
             return peerRef.current.createAnswer();
         }).then(answer => {
