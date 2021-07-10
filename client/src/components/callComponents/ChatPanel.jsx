@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react'
 import { Form,InputGroup } from 'react-bootstrap'
 import { BsCursorFill } from 'react-icons/bs' 
-import { useAuth } from '../firebase/AuthContext'
+import { useAuth } from '../../firebase/AuthContext'
+
+/**
+ * actualMessage = message to be sent 
+ * messageDiv = div with all the messages 
+ * socketref = current socket ref
+ * setGotANewMessage = setting the boolean for if a new messate is recieved 
+ * roomID = current room details 
+ */
 
 export default function ChatPanel({actualMessage, messageDiv, socketRef, setGotANewMessage, roomID}) {
 
-    const {currentUser} = useAuth()
+    const {currentUser} = useAuth()//details of the currently logged in user
 
     useEffect(() => {
-        
+        //receving a new message from the partner
         socketRef.current.on('recieved a new message', ([recievedMessage, senderName]) => {
-            //setPartner(senderName)
             otherMessage(recievedMessage, senderName)
             setGotANewMessage(true)
             scrollToBottom()
@@ -23,10 +30,12 @@ export default function ChatPanel({actualMessage, messageDiv, socketRef, setGotA
     }
 
     function scrollToBottom() {
+        //scrolling to bottom of the message div automatically
         messageDiv.current.scrollTop=messageDiv.current.scrollHeight;
     }
 
     function sendMessage(){
+        //sending a message in the chat 
         if(actualMessage.current.value!=="")
         {
             selfMessage(actualMessage.current.value);
@@ -37,6 +46,7 @@ export default function ChatPanel({actualMessage, messageDiv, socketRef, setGotA
     }
 
     function selfMessage(messageText) {
+        //adding the message onto the screen of the sender in the message div
         var messageDetails = document.createElement('div')
         messageDetails.classList.add('messageCard')
         var yourName = document.createElement('p')
@@ -52,6 +62,7 @@ export default function ChatPanel({actualMessage, messageDiv, socketRef, setGotA
     }
 
     function otherMessage(messageText, senderName) {
+        //adding the message recieved from the partner to the screen in the message div
         var messageDetails = document.createElement('div')
         messageDetails.classList.add('messageCard')
         var otherName = document.createElement('p')
@@ -68,6 +79,7 @@ export default function ChatPanel({actualMessage, messageDiv, socketRef, setGotA
 
     return (
         <div className ="msg-box">
+        {/**the message input box along with the send button*/}
         <Form onSubmit={handleSubmit}>
             <Form.Group id ="message-input">
                 <InputGroup>

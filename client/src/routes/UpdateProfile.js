@@ -3,8 +3,8 @@ import {Form, Button, Alert, InputGroup} from 'react-bootstrap'
 import { useAuth } from '../firebase/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import { Mailbox, FilePersonFill } from 'react-bootstrap-icons'
-import Password from '../formComponents/Password'
-import PasswordConfirm from '../formComponents/PasswordConfirm'
+import Password from '../components/formComponents/Password'
+import PasswordConfirm from '../components/formComponents/PasswordConfirm'
 import '../styles/updateProfile.css'
 
 export default function UpdateProfile() {

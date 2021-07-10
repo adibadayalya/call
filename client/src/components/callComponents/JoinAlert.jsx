@@ -1,6 +1,15 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
 
+/**
+ * otherUserDeets = other user i.e the partner user object 
+ * otherUserName = name of the partner 
+ * partner = other user detals
+ * userJoined = boolean for if the user(partner) has joined the call/room
+ * userLeft = boolean for if the user(partner) has left the call/room
+ * this component returns the join alert which appears on the screen when an user joins or exits a room
+ */
+
 export default function JoinAlert({otherUserDeets, otherUserName, partner, userJoined, userLeft}) {
     return (
         <div className="join-alert">
@@ -12,7 +21,7 @@ export default function JoinAlert({otherUserDeets, otherUserName, partner, userJ
                 )
             }
             {userLeft && (
-                <span className="join-name">{otherUserName} got Sick of you!</span>
+                <span className="join-name">{otherUserName} left!</span>
             )}
         </div>
     )

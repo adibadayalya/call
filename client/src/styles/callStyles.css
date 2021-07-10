@@ -1,6 +1,10 @@
 .outer-box{
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    left: 0;
+    background-color:white;
+    border-radius:0% 0% 100% 0%;
 }
 .video-container{
     height: 85vh;
@@ -227,7 +231,7 @@
 
 .default-message{
     position: absolute;
-    left: 20vw;
+    left: 15vw;
     top:30vh;
     font-size: 60px;
 }

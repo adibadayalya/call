@@ -2,6 +2,11 @@ import React from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
 import {Mailbox} from 'react-bootstrap-icons'
 
+/**
+ * forwardedRef = email ref
+ * this JSX element returns the EMAIL field in the form at the different locations throughout the app
+ */
+
 export default function Email({forwardedRef}) {
     return (
         <Form.Group>

@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react'
 import {Form, Alert,Button} from 'react-bootstrap'
 import { useAuth } from '../firebase/AuthContext'
 import { Link } from 'react-router-dom'
-import Email from '../formComponents/Email'
+import Email from '../components/formComponents/Email'
 import '../styles/signUp.css' 
 
 /**
- * 
+ * Password recovery for users who signed up using email
  * #returns The Forgot Password Page
  */
 
@@ -40,7 +40,7 @@ export default function ForgotPassword() {
             {error && <Alert variant = "danger" >{error}</Alert>}
                 {message && <Alert variant = "success" >{message}</Alert>}
                 <Form onSubmit = {handleSubmit}>
-                    <Email forwardedRef = {emailRef} />
+                    <Email forwardedRef = {emailRef} />{/**Email form element */}
                     <Button disabled ={loading} type="submit" className="w-100 mt-2">Send Reset Password Link</Button>
                 </Form>
             </div>

@@ -3,11 +3,11 @@ import {Form, Alert} from 'react-bootstrap'
 import { useAuth } from '../firebase/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import '../styles/signUp.css'
-import Email from '../formComponents/Email'
-import Name from '../formComponents/Name'
-import Password from '../formComponents/Password'
-import PasswordConfirm from '../formComponents/PasswordConfirm'
-import SignInAlternatives from '../formComponents/SignInAlternatives'
+import Email from '../components/formComponents/Email'
+import Name from '../components/formComponents/Name'
+import Password from '../components/formComponents/Password'
+import PasswordConfirm from '../components/formComponents/PasswordConfirm'
+import SignInAlternatives from '../components/formComponents/SignInAlternatives'
 
 export default function SignUp() {
     const emailRef = useRef()

@@ -81,9 +81,10 @@ export default function Dashboard() {
                 {/**The Create room nad jin room form div */}         
                 <div className="d-flex">
                     <div  className="text-center call-menu shadow">
+                    <CreateMeeting />
                         <Form onSubmit = {handleSubmit}>
                             <Form.Group id="name" className="mt-3 form-men">
-                                <CreateMeeting />{/**Create Meeting element imported from CreateMeeting.js */}
+                                {/**Create Meeting element imported from CreateMeeting.js */}
                                 <span className="line-text mt-4 mb-4">or</span>{/**The seprator line with or in between it */}
                                 {/**The input box element for the Room Code */}
                                 <Form.Control className="mt-3" type="text" placeholder="Enter Meeting Code" 

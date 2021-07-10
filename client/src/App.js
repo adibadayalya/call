@@ -9,7 +9,6 @@ import PublicRoute from './routes/PublicRoute';
 import ForgotPassword from './routes/ForgotPassword';
 import UpdateProfile from './routes/UpdateProfile'
 import Room from './routes/Room';
-
 import {BrowserRouter as Router } from 'react-router-dom' 
 import {AnimatedSwitch} from 'react-router-transition'
 

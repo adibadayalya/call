@@ -2,11 +2,15 @@ import React, { useRef, useState } from 'react'
 import {Form, Alert} from 'react-bootstrap'
 import { useAuth } from '../firebase/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import Email from '../formComponents/Email'
-import Password from '../formComponents/Password'
-import SignInAlternatives from '../formComponents/SignInAlternatives'
-
+import Email from '../components/formComponents/Email'
+import Password from '../components/formComponents/Password'
+import SignInAlternatives from '../components/formComponents/SignInAlternatives'
 import '../styles/login.css'
+
+/**
+ * login via email and other auth methods 
+ * #returns the login page 
+ */
 
 export default function Login() {
     const emailRef = useRef()
@@ -17,6 +21,9 @@ export default function Login() {
     const history = useHistory()
     
     async function handleSubmit(e){
+        /**
+         * Login Function for email users 
+         */
         e.preventDefault()
         try {
             setError('')
@@ -37,9 +44,9 @@ export default function Login() {
             <hr style={{height:"2.5px"}}/>
                 {error && <Alert variant = "danger" >{error}</Alert>}
                 <Form onSubmit = {handleSubmit}>
-                    <Email forwardedRef={emailRef}/>
+                    <Email forwardedRef={emailRef}/>{/**Email form element */}
 
-                    <Password forwardedRef ={passwordRef} />
+                    <Password forwardedRef ={passwordRef} /> {/**Passoword form element */}
 
                     <button disabled ={loading} type="submit" className="mt-2 shadow login-btn">Log In</button>
                     <div className="w-100 text-center mt-3">
